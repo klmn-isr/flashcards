@@ -10,7 +10,7 @@ interface FlashcardProps {
 
 export function Flashcard({ question, onNext }: FlashcardProps) {
   const [showAnswer, setShowAnswer] = useState(false);
-  const [selectedAnswer, setSelectedAnswer] = useState<'answer1' | 'answer2' | null>(null);
+  const [selectedAnswers, setSelectedAnswers] = useState<Set<'answer1' | 'answer2'>>(new Set());
 
   const handleShowAnswer = () => {
     setShowAnswer(true);
@@ -18,12 +18,20 @@ export function Flashcard({ question, onNext }: FlashcardProps) {
 
   const handleNext = () => {
     setShowAnswer(false);
-    setSelectedAnswer(null);
+    setSelectedAnswers(new Set());
     onNext();
   };
 
   const handleAnswerClick = (answer: 'answer1' | 'answer2') => {
-    setSelectedAnswer(answer);
+    setSelectedAnswers(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(answer)) {
+        newSet.delete(answer);
+      } else {
+        newSet.add(answer);
+      }
+      return newSet;
+    });
   };
 
   return (
@@ -49,13 +57,13 @@ export function Flashcard({ question, onNext }: FlashcardProps) {
         <div className="flashcard-answers">
           <div className="answers-container">
             <button
-              className={`answer-btn ${selectedAnswer === 'answer1' ? 'selected' : ''}`}
+              className={`answer-btn ${selectedAnswers.has('answer1') ? 'selected' : ''}`}
               onClick={() => handleAnswerClick('answer1')}
             >
               {question.answer1}
             </button>
             <button
-              className={`answer-btn ${selectedAnswer === 'answer2' ? 'selected' : ''}`}
+              className={`answer-btn ${selectedAnswers.has('answer2') ? 'selected' : ''}`}
               onClick={() => handleAnswerClick('answer2')}
             >
               {question.answer2}

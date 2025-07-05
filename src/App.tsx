@@ -7,7 +7,6 @@ import './App.css'
 
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState<FlashcardQuestion | null>(null)
-  const [score, setScore] = useState(0)
   const [totalQuestions, setTotalQuestions] = useState(0)
 
   const generateNewQuestion = () => {

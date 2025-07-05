@@ -10,7 +10,6 @@
 }
 
 .flashcard:hover {
-  transform: translateY(-4px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
@@ -68,7 +67,6 @@
 }
 
 .show-answer-btn:hover {
-  transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
@@ -99,7 +97,6 @@
 .answer-btn:hover {
   background: #edf2f7;
   border-color: #cbd5e0;
-  transform: translateY(-1px);
 }
 
 .answer-btn.selected {
@@ -123,7 +120,6 @@
 }
 
 .next-btn:hover {
-  transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(240, 147, 251, 0.4);
 }
 
